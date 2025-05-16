@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/04/24 02:21:54 by marcnava          #+#    #+#              #
-#    Updated: 2025/04/24 02:47:55 by marcnava         ###   ########.fr        #
+#    Created: 2025/05/09 01:00:00 by marcnava          #+#    #+#              #
+#    Updated: 2025/05/09 01:00:00 by marcnava         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@
 # ********************************* VARIABLES ******************************** #
 
 # Your program name
-NAME				:=
+NAME				:=	philo_bonus
 
 # Compiler, you can change it to use cc, gcc or clang
 CC					:=	cc
 # Compilation flags
-CFLAGS				:=	-Wall -Wextra -Werror
+CFLAGS				:=	-Wall -Wextra -Werror -pthread
 # Debug flags, comment this line if you don't want to use it
 DFLAGS				:=	-g3
 # Compilation alias with flags
@@ -44,7 +44,8 @@ BUILDPATH			:=	build
 INCLUDES			:=	-Iincludes
 
 # Here you have to put all your .c files
-SRCS				:=
+SRCS				:=	$(SRCPATH)/philo_bonus.c \
+						$(SRCPATH)/routines_bonus.c
 
 # Auto-generated object files using source and build paths
 OBJS				:=	$(SRCS:$(SRCPATH)/%.c=$(BUILDPATH)/%.o)
@@ -68,7 +69,7 @@ $(NAME):			$(OBJS)
 
 $(BUILDPATH)/%.o:	$(SRCPATH)/%.c
 	mkdir -p $(@D)
-	$(COMPILER) -o $@ -c $<
+	$(COMPILER) $(INCLUDES) -o $@ -c $<
 
 clean:
 	$(RM) $(BUILDPATH)
@@ -77,9 +78,6 @@ fclean:				clean
 	$(RM) $(NAME)
 
 re:					fclean all
-
-bonus:
-	echo "Optional rule"
 
 # You can add your custom rules here
 # ==============================================================================
@@ -93,9 +91,9 @@ bonus:
 .PHONY: clean
 .PHONY: fclean
 .PHONY: re
-.PHONY: bonus
 
 # You can add your custom .PHONY rules here
 # ==============================================================================
 
 # ==============================================================================
+
