@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:18:07 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/20 17:28:49 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/05/23 14:15:25 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,16 +101,14 @@ int	init_data(t_data *data, int argc, char **argv)
 	if (initialize_mutexes(data))
 	{
 		print_debug("Failed initializing mutexes", 1, 1);
-		terminate_data(data);
-		return (1);
+		return (terminate_data(data));
 	}
 	print_debug("Mutexes initialized succesfully", 3, 1);
 	print_debug("Creating philosophers", 2, 1);
 	if (generate_philosophers(data))
 	{
 		print_debug("Failed spawning philosophers", 1, 1);
-		terminate_data(data);
-		return (1);
+		return (terminate_data(data));
 	}
 	print_debug("Philosophers created succesfully", 3, 1);
 	return (0);

@@ -6,7 +6,7 @@
 #    By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 18:03:32 by marcnava          #+#    #+#              #
-#    Updated: 2025/05/20 16:31:50 by marcnava         ###   ########.fr        #
+#    Updated: 2025/05/27 17:35:58 by marcnava         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 NAME				:=	philo
 
 CC					:=	cc
-CFLAGS				:=	-Wall -Wextra -pthread
+CFLAGS				:=	-Wall -Wextra -Werror -pthread
 DFLAGS				:=	-g3
 
 COMPILER			:=	$(CC) $(CFLAGS) $(DFLAGS)
@@ -34,11 +34,17 @@ UTILSPATH			:=	$(SRCPATH)/utils
 INCLUDES			:=	-Iincludes
 
 SRCS				:=	$(SRCPATH)/init.c \
-						$(SRCPATH)/philo.c
+						$(SRCPATH)/philo.c \
+						$(SRCPATH)/routines.c \
+						$(SRCPATH)/simulation.c \
+						$(SRCPATH)/terminate.c
 
 SRCS				+=	$(UTILSPATH)/debug.c \
 						$(UTILSPATH)/errors.c \
-						$(UTILSPATH)/libft.c
+						$(UTILSPATH)/fork_actions.c \
+						$(UTILSPATH)/libft.c \
+						$(UTILSPATH)/routines_utils.c \
+						$(UTILSPATH)/time_utils.c
 
 OBJS				:=	$(SRCS:$(SRCPATH)/%.c=$(BUILDPATH)/%.o)
 
