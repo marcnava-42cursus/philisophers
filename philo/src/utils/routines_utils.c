@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:34:22 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/27 20:40:41 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:27:43 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	temporal_name(t_data *data)
 		}
 		i++;
 	}
-	return (pthread_mutex_unlock(&data->mtx_eat), eaten);
+	pthread_mutex_unlock(&data->mtx_eat);
+	return (eaten);
 }
 
 int	check_philosopher(t_data *data)
@@ -87,7 +88,7 @@ int	check_philosopher(t_data *data)
 			}
 			i++;
 		}
-		msleep(1);
+		usleep(1000);
 	}
 	return (0);
 }

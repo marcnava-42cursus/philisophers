@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:57:22 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/27 20:41:11 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/05/28 16:47:58 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ int		check_philosopher(t_data *data);
 
 // Philosophers
 int		simulate(t_data *data);
-void	*philo_routine(void *arg);
 int		init_data(t_data *data, int argc, char **argv);
 int		terminate_data(t_data *data);
 

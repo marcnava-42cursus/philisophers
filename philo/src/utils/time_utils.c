@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:38:01 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/27 17:42:27 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/05/28 17:43:50 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,10 @@
  */
 long	get_time_ms(void)
 {
-	struct timeval	time_value;
-	long			ms;
+	struct timeval	tv;
 
-	gettimeofday(&time_value, NULL);
-	ms = time_value.tv_sec * 1000 + time_value.tv_usec / 1000;
-	return (ms);
+	gettimeofday(&tv, NULL);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
 /**
@@ -53,6 +51,6 @@ void	msleep(long milliseconds)
 	long	start;
 
 	start = get_time_ms();
-	while (get_time_ms() - start < milliseconds)
+	while ((get_time_ms() - start) < milliseconds)
 		usleep(200);
 }

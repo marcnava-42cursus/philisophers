@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:41:07 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/27 17:41:35 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:28:28 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static void	philo_sleep(t_philo *philo)
 static void	philo_think(t_philo *philo)
 {
 	print_philo_action(philo, THINK_MSG);
-	msleep(1);
+	usleep(100);
 }
 
-void	*philo_routine(void *arg)
+static void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
 
@@ -47,7 +47,7 @@ void	*philo_routine(void *arg)
 	if (philo->data->n_philos == 1)
 		return (one_philo_routine(philo));
 	if (philo->id % 2 == 0)
-		msleep(1);
+		usleep(1000);
 	while (!is_dead(philo->data) && !temporal_name(philo->data))
 	{
 		philo_eat(philo);
@@ -55,4 +55,21 @@ void	*philo_routine(void *arg)
 		philo_think(philo);
 	}
 	return (NULL);
+}
+
+int	simulate(t_data *data)
+{
+	int	i;
+
+	data->start_time = get_time_ms();
+	i = 0;
+	while (i < data->n_philos)
+	{
+		data->philos[i].last_eat_time = data->start_time;
+		if (pthread_create(&data->philos[i].thread, NULL,
+				philo_routine, &data->philos[i]))
+			return (1);
+		i++;
+	}
+	return (0);
 }

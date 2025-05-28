@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:18:07 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/23 14:15:25 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:27:54 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ static int	parse_arguments(t_data *data, int argc, char **argv)
 			return (1);
 		data->eat_limit = ft_atoi(argv[5]);
 	}
-	if (data->n_philos < 1 || data->time_to_die < 0
-		|| data->time_to_eat < 0 || data->time_to_sleep < 0
-		|| (data->eat_limit != -1 && data->eat_limit < 0))
+	if (data->n_philos <= 0 || data->time_to_die <= 0
+		|| data->time_to_eat <= 0 || data->time_to_sleep <= 0
+		|| (argc == 6 && data->eat_limit <= 0))
 		return (1);
 	return (0);
 }
