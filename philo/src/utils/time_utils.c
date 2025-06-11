@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:38:01 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/28 17:43:50 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:33:15 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ long	get_time_ms(void)
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
+long	get_time_diff(long start)
+{
+	return (get_time_ms() - start);
+}
+
 /**
  * @brief Pauses the execution of the program for a specified number of
  *        milliseconds.
@@ -51,6 +56,6 @@ void	msleep(long milliseconds)
 	long	start;
 
 	start = get_time_ms();
-	while ((get_time_ms() - start) < milliseconds)
-		usleep(200);
+	while (get_time_diff(start) < milliseconds)
+		usleep(500);
 }

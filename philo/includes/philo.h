@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:57:22 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/28 16:47:58 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:44:37 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,29 +74,25 @@ struct s_data
 
 // Libft
 int		ft_atoi(const char *str);
-void	*ft_calloc(size_t count, size_t size);
-void	ft_free(void **ptr);
-void	*ft_memcpy(void *dest, const void *src, size_t n);
-char	*ft_strdup(const char *s);
 
 // Errors
 void	ft_error(int error_code, char **argv);
 
 // Utils
-void	print_debug(char *message, int status, int show);
 void	print_philo_action(t_philo *philo, char *action);
-void	*one_philo_routine(t_philo *philo);
+void	one_philo_routine(t_philo *philo);
 long	get_time_ms(void);
+long	get_time_diff(long start);
 void	msleep(long milliseconds);
 int		is_dead(t_data *data);
-int		temporal_name(t_data *data);
+int		all_meals_completed(t_data *data);
 void	take_fork(t_philo *philo, int left_fork, int right_fork);
 void	drop_fork(t_philo *philo, int left_fork, int right_fork);
 int		check_philosopher(t_data *data);
 
 // Philosophers
-int		simulate(t_data *data);
 int		init_data(t_data *data, int argc, char **argv);
-int		terminate_data(t_data *data);
+void	terminate_data(t_data *data);
+int		simulate(t_data *data);
 
 #endif

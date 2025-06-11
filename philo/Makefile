@@ -6,7 +6,7 @@
 #    By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/19 18:03:32 by marcnava          #+#    #+#              #
-#    Updated: 2025/05/28 16:49:13 by marcnava         ###   ########.fr        #
+#    Updated: 2025/06/11 14:11:53 by marcnava         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,8 +38,7 @@ SRCS				:=	$(SRCPATH)/init.c \
 						$(SRCPATH)/routines.c \
 						$(SRCPATH)/terminate.c
 
-SRCS				+=	$(UTILSPATH)/debug.c \
-						$(UTILSPATH)/errors.c \
+SRCS				+=	$(UTILSPATH)/errors.c \
 						$(UTILSPATH)/fork_actions.c \
 						$(UTILSPATH)/libft.c \
 						$(UTILSPATH)/routines_utils.c \

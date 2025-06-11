@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 19:18:07 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/28 19:27:54 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:37:54 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,18 @@
 
 static int	is_number(const char *str)
 {
+	int	i;
+
+	i = 0;
 	if (!str || !*str)
 		return (0);
-	while (*str >= '0' && *str <= '9')
-		str++;
-	return (*str == '\0');
+	while (str[i])
+	{
+		if (str[i] < '0' || str[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 static int	parse_arguments(t_data *data, int argc, char **argv)
@@ -48,7 +55,7 @@ static int	initialize_mutexes(t_data *data)
 {
 	int	i;
 
-	data->forks = ft_calloc(data->n_philos, sizeof(pthread_mutex_t));
+	data->forks = malloc(data->n_philos * sizeof(pthread_mutex_t));
 	if (!data->forks)
 		return (1);
 	i = 0;
@@ -71,7 +78,7 @@ static int	generate_philosophers(t_data *data)
 {
 	int	i;
 
-	data->philos = ft_calloc(data->n_philos, sizeof(t_philo));
+	data->philos = malloc(data->n_philos * sizeof(t_philo));
 	if (!data->philos)
 		return (1);
 	i = 0;
@@ -90,26 +97,21 @@ static int	generate_philosophers(t_data *data)
 
 int	init_data(t_data *data, int argc, char **argv)
 {
-	print_debug("Cleaning all memory data", 3, 1);
 	memset(data, 0, sizeof(t_data));
-	print_debug("Parsing arguments", 2, 1);
 	if (parse_arguments(data, argc, argv))
-		return (print_debug("Failed parsing arguments", 1, 1), 1);
-	print_debug("All arguments parsed succesfully", 3, 1);
+		return (1);
 	data->philo_death = 0;
-	print_debug("Initializing mutexes", 2, 1);
 	if (initialize_mutexes(data))
 	{
-		print_debug("Failed initializing mutexes", 1, 1);
-		return (terminate_data(data));
+		printf("Error: Failed initializing mutexes");
+		terminate_data(data);
+		return (1);
 	}
-	print_debug("Mutexes initialized succesfully", 3, 1);
-	print_debug("Creating philosophers", 2, 1);
 	if (generate_philosophers(data))
 	{
-		print_debug("Failed spawning philosophers", 1, 1);
-		return (terminate_data(data));
+		printf("Error: Failed initializing philosophers");
+		terminate_data(data);
+		return (1);
 	}
-	print_debug("Philosophers created succesfully", 3, 1);
 	return (0);
 }

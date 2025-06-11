@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:34:22 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/28 19:27:43 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:45:13 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ void	print_philo_action(t_philo *philo, char *action)
 	long	timestamp;
 
 	pthread_mutex_lock(&philo->data->mtx_print);
-	timestamp = get_time_ms() - philo->data->start_time;
+	timestamp = get_time_diff(philo->data->start_time);
 	if (!is_dead(philo->data))
 		printf("%ld %d %s\n", timestamp, philo->id, action);
 	pthread_mutex_unlock(&philo->data->mtx_print);
 }
 
-void	*one_philo_routine(t_philo *philo)
+void	one_philo_routine(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data->forks[philo->left_fork]);
 	print_philo_action(philo, FORK_MSG);
 	msleep(philo->data->time_to_die);
 	pthread_mutex_unlock(&philo->data->forks[philo->left_fork]);
-	return (NULL);
 }
 
 int	is_dead(t_data *data)
@@ -42,7 +41,7 @@ int	is_dead(t_data *data)
 	return (isdeath);
 }
 
-int	temporal_name(t_data *data)
+int	all_meals_completed(t_data *data)
 {
 	int	i;
 	int	eaten;
@@ -70,13 +69,13 @@ int	check_philosopher(t_data *data)
 	int		i;
 	long	diff_eat_time;
 
-	while (!is_dead(data) && !temporal_name(data))
+	while (!is_dead(data) && !all_meals_completed(data))
 	{
 		i = 0;
 		while (i < data->n_philos)
 		{
 			pthread_mutex_lock(&data->mtx_eat);
-			diff_eat_time = get_time_ms() - data->philos[i].last_eat_time;
+			diff_eat_time = get_time_diff(data->philos[i].last_eat_time);
 			pthread_mutex_unlock(&data->mtx_eat);
 			if (diff_eat_time > data->time_to_die)
 			{

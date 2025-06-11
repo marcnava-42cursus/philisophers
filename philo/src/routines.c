@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:41:07 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/28 19:28:28 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:48:44 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,13 @@ static void	*philo_routine(void *arg)
 	philo->last_eat_time = philo->data->start_time;
 	pthread_mutex_unlock(&philo->data->mtx_eat);
 	if (philo->data->n_philos == 1)
-		return (one_philo_routine(philo));
+	{
+		one_philo_routine(philo);
+		return (NULL);
+	}
 	if (philo->id % 2 == 0)
 		usleep(1000);
-	while (!is_dead(philo->data) && !temporal_name(philo->data))
+	while (!is_dead(philo->data) && !all_meals_completed(philo->data))
 	{
 		philo_eat(philo);
 		philo_sleep(philo);

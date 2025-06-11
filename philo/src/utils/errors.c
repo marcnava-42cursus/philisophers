@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/19 17:55:14 by marcnava          #+#    #+#             */
-/*   Updated: 2025/05/28 16:02:32 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 14:33:04 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ void	ft_error(int error_code, char **argv)
 	if (error_code == ERR_USAGE)
 		print_usage(argv[0]);
 	if (error_code == ERR_INIT)
-		print_debug("Error setting up the simulation", 1, 1);
+		printf("Error setting up the simulation");
 	exit(EXIT_KO);
 }
