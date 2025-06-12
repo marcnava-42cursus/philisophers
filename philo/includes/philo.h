@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 19:57:22 by marcnava          #+#    #+#             */
-/*   Updated: 2025/06/11 14:44:37 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:23:24 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ struct s_philo
 	int			left_fork;
 	int			right_fork;
 	int			eat_count;
-	int			last_eat_time;
+	long		last_eat_time;
 	pthread_t	thread;
 	t_data		*data;
 };

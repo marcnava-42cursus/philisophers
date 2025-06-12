@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/23 14:34:22 by marcnava          #+#    #+#             */
-/*   Updated: 2025/06/11 14:45:13 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:26:19 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,13 +69,14 @@ int	check_philosopher(t_data *data)
 	int		i;
 	long	diff_eat_time;
 
+	usleep(5000);
 	while (!is_dead(data) && !all_meals_completed(data))
 	{
 		i = 0;
 		while (i < data->n_philos)
 		{
 			pthread_mutex_lock(&data->mtx_eat);
-			diff_eat_time = get_time_diff(data->philos[i].last_eat_time);
+			diff_eat_time = get_time_ms() - data->philos[i].last_eat_time;
 			pthread_mutex_unlock(&data->mtx_eat);
 			if (diff_eat_time > data->time_to_die)
 			{

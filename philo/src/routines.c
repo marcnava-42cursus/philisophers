@@ -6,7 +6,7 @@
 /*   By: marcnava <marcnava@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/20 17:41:07 by marcnava          #+#    #+#             */
-/*   Updated: 2025/06/11 14:48:44 by marcnava         ###   ########.fr       */
+/*   Updated: 2025/06/11 19:24:38 by marcnava         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ int	simulate(t_data *data)
 	i = 0;
 	while (i < data->n_philos)
 	{
-		data->philos[i].last_eat_time = data->start_time;
 		if (pthread_create(&data->philos[i].thread, NULL,
 				philo_routine, &data->philos[i]))
 			return (1);
